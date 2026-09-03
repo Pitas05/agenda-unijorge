@@ -1,0 +1,33 @@
+@if (errosDeId.length > 0) {
+  <div class="alerta-global">
+    <ul>
+      @for (erro of errosDeId; track erro) {
+        <li>{{ erro }}</li>
+      }
+    </ul>
+  </div>
+}
+
+<div class="lista-pessoas">
+  @for (item of resultados; track item.pessoa.id) {
+    <div class="cartao" [class.invalido]="item.erros.length > 0">
+      <h3>{{ item.pessoa.nome }}</h3>
+      <p><strong>E-mail:</strong> {{ item.pessoa.email }}</p>
+      <p><strong>Curso:</strong> {{ item.pessoa.curso }}</p>
+      
+      @if (item.pessoa.telefone) {
+        <p><strong>Telefone:</strong> {{ item.pessoa.telefone }}</p>
+      }
+
+      @if (item.erros.length > 0) {
+        <div class="mensagens-erro">
+          <ul>
+            @for (erro of item.erros; track erro) {
+              <li>{{ erro }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
+</div>

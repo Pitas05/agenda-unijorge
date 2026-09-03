@@ -1,0 +1,22 @@
+.home-container {
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.destaque {
+  background-color: #f0fdf4;
+  border-left: 4px solid #16a34a;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.destaque h3 {
+  margin-top: 0;
+  color: #15803d;
+}
+
+.destaque ul {
+  margin-bottom: 0;
+  padding-left: 20px;
+}
