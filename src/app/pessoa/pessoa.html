@@ -1,33 +1,131 @@
-@if (errosDeId.length > 0) {
-  <div class="alerta-global">
-    <ul>
-      @for (erro of errosDeId; track erro) {
-        <li>{{ erro }}</li>
-      }
-    </ul>
+<div class="container">
+  <h2>Ficha de cadastro</h2>
+  
+  <div class="resumo-erros" *ngIf="temErros">
+    {{ Object.keys(erros).length }} campo(s) com erro
   </div>
-}
 
-<div class="lista-pessoas">
-  @for (item of resultados; track item.pessoa.id) {
-    <div class="cartao" [class.invalido]="item.erros.length > 0">
-      <h3>{{ item.pessoa.nome }}</h3>
-      <p><strong>E-mail:</strong> {{ item.pessoa.email }}</p>
-      <p><strong>Curso:</strong> {{ item.pessoa.curso }}</p>
+  <form (ngSubmit)="salvar()">
+    <div class="layout-grid">
       
-      @if (item.pessoa.telefone) {
-        <p><strong>Telefone:</strong> {{ item.pessoa.telefone }}</p>
-      }
+      <div class="coluna">
+        
+        <fieldset>
+          <legend>Identificação</legend>
+          
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input 
+              id="nome" 
+              name="nome" 
+              type="text" 
+              [(ngModel)]="rascunho.nome" 
+              (blur)="marcarTocado('nome')"
+              [class.com-erro]="tocados['nome'] && erros.nome"
+            />
+            <span class="erro-msg" *ngIf="tocados['nome'] && erros.nome">{{ erros.nome }}</span>
+          </div>
 
-      @if (item.erros.length > 0) {
-        <div class="mensagens-erro">
-          <ul>
-            @for (erro of item.erros; track erro) {
-              <li>{{ erro }}</li>
-            }
-          </ul>
+          <div class="campo">
+            <label for="nacionalidade">Nacionalidade</label>
+            <select 
+              id="nacionalidade" 
+              name="nacionalidade" 
+              [(ngModel)]="rascunho.nacionalidade"
+            >
+              <option value="Brasileira">Brasileira</option>
+              <option value="Estrangeira">Estrangeira</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Documentos</legend>
+
+          <div class="campo">
+            <label for="cpf">CPF</label>
+            <input 
+              id="cpf" 
+              name="cpf" 
+              type="text" 
+              [(ngModel)]="rascunho.cpf" 
+              (blur)="marcarTocado('cpf')"
+              [class.com-erro]="tocados['cpf'] && erros.cpf"
+            />
+            <span class="erro-msg" *ngIf="tocados['cpf'] && erros.cpf">{{ erros.cpf }}</span>
+          </div>
+
+          <div class="campo">
+            <label for="rg">RG <span class="opcional">(opcional)</span></label>
+            <input 
+              id="rg" 
+              name="rg" 
+              type="text" 
+              [(ngModel)]="rascunho.rg" 
+            />
+          </div>
+
+          <div class="campo">
+            <label for="passaporte">Passaporte</label>
+            <input 
+              id="passaporte" 
+              name="passaporte" 
+              type="text" 
+              [(ngModel)]="rascunho.passaporte" 
+              (blur)="marcarTocado('passaporte')"
+              [class.com-erro]="tocados['passaporte'] && erros.passaporte"
+            />
+            <span class="erro-msg" *ngIf="tocados['passaporte'] && erros.passaporte">{{ erros.passaporte }}</span>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <div class="coluna">
+        
+        <fieldset>
+          <legend>Acesso e preferências</legend>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input 
+              id="senha" 
+              name="senha" 
+              type="password" 
+              [(ngModel)]="rascunho.senha" 
+              (blur)="marcarTocado('senha')"
+              [class.com-erro]="tocados['senha'] && erros.senha"
+            />
+            <span class="erro-msg" *ngIf="tocados['senha'] && erros.senha">{{ erros.senha }}</span>
+          </div>
+
+          <div class="campo">
+            <label for="confirmarSenha">Repita a senha</label>
+            <input 
+              id="confirmarSenha" 
+              name="confirmarSenha" 
+              type="password" 
+              [(ngModel)]="rascunho.confirmarSenha" 
+              (blur)="marcarTocado('confirmarSenha')"
+              [class.com-erro]="tocados['confirmarSenha'] && erros.confirmarSenha"
+            />
+            <span class="erro-msg" *ngIf="tocados['confirmarSenha'] && erros.confirmarSenha">{{ erros.confirmarSenha }}</span>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn-salvar" [disabled]="temErros">Salvar</button>
+
+        <div class="secao-lista">
+          <h3>Pessoas ({{ listaPessoas.length }})</h3>
+          
+          <div class="card-pessoa" *ngFor="let p of listaPessoas">
+            <div class="nome">{{ p.nome }}</div>
+            <div class="detalhe">{{ p.email }} · {{ p.vinculo }}</div>
+          </div>
         </div>
-      }
+
+      </div>
+
     </div>
-  }
+  </form>
 </div>
