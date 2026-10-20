@@ -1,0 +1,35 @@
+<div class="empresa-container">
+  <h2>Cadastro da empresa</h2>
+
+  <form class="form-empresa" (ngSubmit)="enviar()" (reset)="limpar()">
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text" [(ngModel)]="empresa.nome" />
+    </div>
+
+    <div class="campo">
+      <label for="cnpj">CNPJ</label>
+      <input id="cnpj" name="cnpj" type="text" [(ngModel)]="empresa.cnpj" />
+    </div>
+
+    <div class="campo">
+      <label for="logomarca">Logomarca</label>
+      <input id="logomarca" name="logomarca" type="text" [(ngModel)]="empresa.logomarca" />
+    </div>
+
+    <div class="campo">
+      <label for="fundacao">Fundação</label>
+      <input id="fundacao" name="fundacao" type="date" [(ngModel)]="empresa.fundacao" />
+    </div>
+
+    <div class="campo">
+      <label for="descricao">Descrição</label>
+      <input id="descricao" name="descricao" type="text" [(ngModel)]="empresa.descricao" />
+    </div>
+
+    <div class="acoes">
+      <button type="reset" class="btn btn-limpar">Limpar</button>
+      <button type="submit" class="btn btn-enviar">Enviar</button>
+    </div>
+  </form>
+</div>

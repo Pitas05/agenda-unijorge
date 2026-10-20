@@ -1,12 +1,15 @@
-<main style="padding: 20px; font-family: sans-serif;">
-  <h1>Agenda Unijorge</h1>
+<main class="app-shell">
+  <header class="app-header">
+    <h1 class="app-title">Agenda Unijorge</h1>
 
-  <nav style="margin: 15px 0; display: flex; gap: 15px;">
-    <a routerLink="/home" routerLinkActive="ativo">Home</a>
-    <a routerLink="/pessoas" routerLinkActive="ativo">Pessoas</a>
-  </nav>
+    <nav class="app-nav" aria-label="Menu principal">
+      <a class="nav-link" routerLink="/home" routerLinkActive="ativo">Home</a>
+      <a class="nav-link" routerLink="/pessoas" routerLinkActive="ativo">Pessoas</a>
+      <a class="nav-link" routerLink="/empresa" routerLinkActive="ativo">Empresa</a>
+    </nav>
+  </header>
 
-  <hr style="margin-bottom: 20px;" />
-
-  <router-outlet></router-outlet>
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
 </main>
